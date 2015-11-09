@@ -3,6 +3,7 @@ package org.apache.tinkerpop.gremlin.orientdb;
 import com.orientechnologies.orient.core.db.record.OIdentifiable;
 import com.orientechnologies.orient.core.db.record.ORecordElement;
 import com.orientechnologies.orient.core.db.record.ridbag.ORidBag;
+import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -92,19 +93,25 @@ public class OrientEdge extends OrientElement implements Edge {
 
     public void remove() {
         ODocument doc = getRawDocument();
-        if (doc.getInternalStatus() == ORecordElement.STATUS.NOT_LOADED) {
+        if (doc.getInternalStatus() == ORecordElement.STATUS.NOT_LOADED)
             doc.load();
-        }
 
-        removeLink(Direction.IN);
-        removeLink(Direction.OUT);
-        doc.getDatabase().delete(doc.getIdentity());
+        removeLink(Direction.IN, vIn);
+        removeLink(Direction.OUT, vOut);
+        ORID id = id();
+        doc.getDatabase().delete(id);
+        rawElement = new RemovedOIdentifiable(id);
     }
 
     @SuppressWarnings("unchecked")
-    private void removeLink( Direction direction) {
+	private void removeLink( Direction direction, OIdentifiable rawVertex ) {
         final String fieldName = OrientVertex.getConnectionFieldName(direction, this.label());
-        ODocument doc = this.getVertex(direction).getRawDocument();
+        ODocument doc;
+		if (rawVertex instanceof ODocument) {
+			doc = (ODocument) rawVertex;
+		} else {
+			doc = this.getVertex(direction).getRawDocument();
+		}
         Object found = doc.field(fieldName);
         if(found instanceof ORidBag) {
             ORidBag bag = (ORidBag)found;
@@ -113,7 +120,7 @@ public class OrientEdge extends OrientElement implements Edge {
         }
         else if (found instanceof Collection<?>) {
             ((Collection<Object>) found).remove(this.getRawElement());
-            if(((Collection<Object>) found).size() == 0) doc.removeField(fieldName);
+            if(((Collection<Object>) found).isEmpty()) doc.removeField(fieldName);
         } else
             throw new IllegalStateException("Relationship content is invalid on field " + fieldName + ". Found: " + found);
         doc.save();
