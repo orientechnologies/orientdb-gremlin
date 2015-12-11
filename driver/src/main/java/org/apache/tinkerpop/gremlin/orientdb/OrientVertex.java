@@ -223,6 +223,7 @@ public final class OrientVertex extends OrientElement implements Vertex {
         }
 
         doc.getDatabase().delete(doc.getIdentity());
+        rawElement = new RemovedOIdentifiable(id());
     }
 
 
