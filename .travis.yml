@@ -4,11 +4,17 @@ os:
   - linux
 jdk:
   - oraclejdk8
+  - oraclejdk9
+
 sudo: required
 dist: trusty
+group: edge
+
+before_install: 
+  - echo "MAVEN_OPTS='-Xmx1536m'" > ~/.mavenrc
 
 install:
-  - mvn install dependency:go-offline -Pskip-formatter -DskipTests=true -q -f driver/pom.xml -Dfailsafe.timeout=0
+  - mvn install dependency:go-offline -Pskip-formatter -DskipTests=true -f driver/pom.xml -Dfailsafe.timeout=0
 
 script:
   - mvn install -P travis -B -f driver/pom.xml -Dfailsafe.timeout=0
