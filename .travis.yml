@@ -10,6 +10,9 @@ sudo: required
 dist: trusty
 group: edge
 
+before_install: 
+  - echo "MAVEN_OPTS='-Xmx1536m'" > ~/.mavenrc
+
 install:
   - mvn install dependency:go-offline -Pskip-formatter -DskipTests=true -f driver/pom.xml -Dfailsafe.timeout=0
 
