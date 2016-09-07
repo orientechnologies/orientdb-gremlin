@@ -302,7 +302,6 @@ public class OrientGraphTest {
     @Test
     public void checkMemoryDrop() {
 
-
         OrientGraphFactory factory = new OrientGraphFactory("memory:_dropDB");
 
         OrientGraph graph = factory.getNoTx();
