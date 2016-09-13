@@ -27,10 +27,10 @@ You might want to use [orientdb-migrations](https://github.com/springnz/orientdb
 
 ## Release
 * upgrade version: remove SNAPSHOT (driver/pom.xml and tests-scala/build.sbt)
-* commit on branch, create PR
-* final test before deploying: 
+* final test before releasing: 
   * driver: mvn install -P release
   * tests-scala: sbt clean test
+* commit on branch, create PR, await travis feedback
 * merge PR
 * mvn clean deploy -Prelease
 * git tag VERSION
