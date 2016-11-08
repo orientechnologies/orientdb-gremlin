@@ -1,6 +1,6 @@
 # orientdb-gremlin
 
-[![Build Status](https://travis-ci.org/orientechnologies/orientdb-gremlin.svg?branch=master)](https://travis-ci.org/orientechnologies/orientdb-gremlin) [![Coverage Status](https://coveralls.io/repos/mpollmeier/orientdb-gremlin/badge.svg?branch=master)](https://coveralls.io/r/mpollmeier/orientdb-gremlin?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/orientdb-gremlin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/orientdb-gremlin/) 
+[![Build Status](https://travis-ci.org/orientechnologies/orientdb-gremlin.svg?branch=master)](https://travis-ci.org/orientechnologies/orientdb-gremlin) [![Coverage Status](https://coveralls.io/repos/github/orientechnologies/orientdb-gremlin/badge.svg?branch=master)](https://coveralls.io/github/orientechnologies/orientdb-gremlin?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/orientdb-gremlin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/orientdb-gremlin/) 
 
 TP3 Graph Structure Implementation for OrientDB. This started off as just a proof of concept, but thanks to a lot of help it's now in a really good shape. 
 
