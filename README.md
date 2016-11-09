@@ -2,14 +2,15 @@
 
 [![Build Status](https://travis-ci.org/orientechnologies/orientdb-gremlin.svg?branch=master)](https://travis-ci.org/orientechnologies/orientdb-gremlin) [![Coverage Status](https://coveralls.io/repos/github/orientechnologies/orientdb-gremlin/badge.svg?branch=master)](https://coveralls.io/github/orientechnologies/orientdb-gremlin?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/orientdb-gremlin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/orientdb-gremlin/) 
 
-TP3 Graph Structure Implementation for OrientDB. This started off as just a proof of concept, but thanks to a lot of help it's now in a really good shape. 
+Apache TinkerPop 3 Graph Structure Implementation for OrientDB. This started off as just a proof of concept, but thanks to a lot of help it's now in a really good shape. 
 
-Warning: While this is (as of now) the only TP3 graph structure implementation for OrientDB, it's not the `official` one - it's not supported by the Orient team. The contributors focused on the functionality needed for their use cases, and it doesn't claim to be complete. 
+Warning: While this is (as of now) the only Apache TinkerPop3 graph structure implementation for OrientDB, it's not the `official` one - it's not supported by the Orient team. The contributors focused on the functionality needed for their use cases, and it doesn't claim to be complete. 
+UPDATE: since Nov 2016 OrientDB team started a process to officially support this module. A stable and supported release will be announced in the near future.
 
 The main area that need some more work is index lookups - currently it does find the right index for a simple case, e.g. `g.V.hasLabel("myLabel").has("someKey", "someValue")`. However if there are multiple indexes on the same property, or if there the traversal should better use a composite index, that's not handled well yet. If you feel inclined you can add these cases to the `OrientGraphIndexTest.java`. The function that looks up indexes is `OrientGraphStep.findIndex`.
 
 ## Tests
-* you can run the standard tinkerpop test suite with `mvn install -P release`
+* you can run the standard Apache TinkerPop test suite with `mvn install -P release`
 * there are some additional tests that you can run independently with `mvn test`
 * additionally there is a separate suite of tests in the `tests-scala` directory which you can run using `sbt test`
 * to automatically format the code (travis CI enforces a format check), just run `mvn clean install`
