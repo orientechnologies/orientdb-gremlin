@@ -298,12 +298,12 @@ public final class OrientGraph implements Graph {
     }
 
     private OIndexManager getIndexManager() {
-		makeActiveDb();
+        makeActiveDb();
         return database.getMetadata().getIndexManager();
     }
 
     private OSchema getSchema() {
-		makeActiveDb();
+        makeActiveDb();
         return database.getMetadata().getSchema();
     }
 
