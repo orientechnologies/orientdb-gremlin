@@ -117,5 +117,9 @@ public class OrientGraphProvider extends AbstractGraphProvider {
 
         return new MockORID("Invalid id: " + id + " for " + c);
     }
+    
+    public String stringfyId(Object id) {
+    	return '"' + id.toString() + '"';
+    }
 
 }
