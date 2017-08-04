@@ -11,8 +11,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <gremlin.version>3.2.3</gremlin.version>
-        <orientdb.version>2.2.12</orientdb.version>
+        <gremlin.version>3.2.5</gremlin.version>
+        <orientdb.version>2.2.25</orientdb.version>
     </properties>
 
     <developers>

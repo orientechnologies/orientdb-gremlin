@@ -1,24 +1,5 @@
 package org.apache.tinkerpop.gremlin.orientdb;
 
-import static org.apache.tinkerpop.gremlin.orientdb.StreamUtils.asStream;
-
-import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.lang.NotImplementedException;
-import org.apache.tinkerpop.gremlin.orientdb.traversal.strategy.optimization.OrientGraphStepStrategy;
-import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
-import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
-import org.apache.tinkerpop.gremlin.structure.*;
-import org.apache.tinkerpop.gremlin.structure.io.Io;
-import org.apache.tinkerpop.gremlin.structure.io.Io.Builder;
-import org.apache.tinkerpop.gremlin.structure.util.ElementHelper;
-import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
-
 import com.orientechnologies.common.exception.OException;
 import com.orientechnologies.common.log.OLogManager;
 import com.orientechnologies.common.util.OCallable;
@@ -27,6 +8,7 @@ import com.orientechnologies.orient.core.db.ODatabaseRecordThreadLocal;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.db.record.OIdentifiable;
+import com.orientechnologies.orient.core.exception.ORecordNotFoundException;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.id.ORecordId;
 import com.orientechnologies.orient.core.index.OIndex;
@@ -40,6 +22,24 @@ import com.orientechnologies.orient.core.record.impl.ODocumentInternal;
 import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.orientechnologies.orient.core.storage.OStorage;
 import com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.NotImplementedException;
+import org.apache.tinkerpop.gremlin.orientdb.traversal.strategy.optimization.OrientGraphStepStrategy;
+import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
+import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
+import org.apache.tinkerpop.gremlin.structure.*;
+import org.apache.tinkerpop.gremlin.structure.io.Io;
+import org.apache.tinkerpop.gremlin.structure.io.Io.Builder;
+import org.apache.tinkerpop.gremlin.structure.util.ElementHelper;
+import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
+
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+import static org.apache.tinkerpop.gremlin.orientdb.StreamUtils.asStream;
 
 @Graph.OptIn(Graph.OptIn.SUITE_STRUCTURE_STANDARD)
 @Graph.OptIn(Graph.OptIn.SUITE_STRUCTURE_INTEGRATE)
@@ -373,21 +373,24 @@ public final class OrientGraph implements Graph {
             return asStream(itty).map(toA).iterator();
         } else {
             Stream<ORID> ids = Stream.of(elementIds).map(OrientGraph::createRecordId).peek(id -> checkId(id));
-            Stream<ORecord> records = ids.filter(ORID::isValid).map(id -> (ORecord) id.getRecord()).filter(r -> r != null);
+            Stream<ORecord> records = ids.filter(ORID::isValid).map(id -> getRecord(id)).filter(r -> r != null);
             return records.map(toA).iterator();
+        }
+    }
+
+    protected ORecord getRecord(ORID id) {
+        try {
+            return id.getRecord();
+        } catch (ORecordNotFoundException e) {
+            throw new NoSuchElementException(
+                    "The " + getClass().getSimpleName().toLowerCase() + " with id " + id + " of type " + id.getClass().getSimpleName()
+                            + " does not exist in the graph");
         }
     }
 
     private ORID checkId(ORID id) {
         if (!id.isValid())
             throw new IllegalArgumentException("Invalid id " + id);
-        try {
-            database.getRecordMetadata(id);
-        } catch (IllegalArgumentException e) {
-            // bummer, the API force me to break the chain =((
-            // https://github.com/apache/incubator-tinkerpop/commit/34ec9e7f60f15b5dbfa684a8e96668d9bbcb6752#commitcomment-14235497
-            throw Graph.Exceptions.elementNotFound(Edge.class, id);
-        }
         return id;
     }
 

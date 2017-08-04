@@ -1,18 +1,18 @@
 package org.apache.tinkerpop.gremlin.orientdb;
 
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
-
-import java.util.List;
-import java.util.Map;
-
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertThat;
 
 public class MatcherStepTest {
 
