@@ -1,12 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.orientechnologies</groupId>
-    <artifactId>orientdb-gremlin</artifactId>
-    <version>2.2.27-SNAPSHOT</version>
     <name>Apache TinkerPop :: OrientDB Gremlin</name>
     <description>TinkerPop3 Graph Structure Implementation for OrientDB</description>
     <url>https://github.com/orientechnologies/orientdb-gremlin</url>
+
+    <parent>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-parent</artifactId>
+        <version>2.2.27-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <artifactId>orientdb-gremlin</artifactId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,6 +67,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-client</artifactId>
@@ -96,6 +103,28 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.orientechnologies</groupId>
+            <artifactId>orientdb-test-commons</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.orientechnologies</groupId>
+            <artifactId>orientdb-core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
     <distributionManagement>
         <snapshotRepository>
