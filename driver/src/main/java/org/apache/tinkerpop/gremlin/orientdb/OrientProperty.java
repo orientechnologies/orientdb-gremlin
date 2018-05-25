@@ -7,7 +7,11 @@ import org.apache.tinkerpop.gremlin.structure.Property;
 import org.apache.tinkerpop.gremlin.structure.util.ElementHelper;
 import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
+import java.util.Collection;
 import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OrientProperty<V> implements Property<V> {
   protected String        key;
@@ -23,7 +27,7 @@ public class OrientProperty<V> implements Property<V> {
 
   }
 
-  private Object wrapIntoGraphElement(V value) {
+  private Object wrapIntoGraphElement(Object value) {
     Object result = value;
     if (result instanceof ORID) {
       result = ((ORID) result).getRecord();
@@ -34,8 +38,24 @@ public class OrientProperty<V> implements Property<V> {
       } else if (((OElement) value).isEdge()) {
         result = element.getGraph().elementFactory().wrapEdge(((OElement) result).asEdge().get());
       }
+    } else if (result instanceof Collection && containsGraphElements((Collection) result)) {
+      Stream transformed = ((Collection) result).stream().map(x -> wrapIntoGraphElement(x));
+      if (result instanceof Set) {
+        result = transformed.collect(Collectors.toSet());
+      } else {
+        result = transformed.collect(Collectors.toList());
+      }
     }
     return result;
+  }
+
+  private boolean containsGraphElements(Collection result) {
+    for (Object o : result) {
+      if (o instanceof OElement && (((OElement) o).isVertex() || ((OElement) o).isEdge())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
