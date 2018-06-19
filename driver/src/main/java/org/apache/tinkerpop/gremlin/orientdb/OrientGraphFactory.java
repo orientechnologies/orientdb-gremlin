@@ -9,7 +9,7 @@ import com.orientechnologies.orient.core.exception.ODatabaseException;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OSchema;
 
-public final class OrientGraphFactory {
+public class OrientGraphFactory {
     public static String ADMIN = "admin";
     protected final String url;
     protected final String user;
