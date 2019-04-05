@@ -29,4 +29,26 @@
         <module>distribution</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.orientechnologies</groupId>
+            <artifactId>orientdb-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+       <dependency>
+            <groupId>com.orientechnologies</groupId>
+            <artifactId>orientdb-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>        
+       <dependency>
+            <groupId>com.orientechnologies</groupId>
+            <artifactId>orientdb-server</artifactId>
+            <version>${project.version}</version>
+        </dependency>        
+       <dependency>
+            <groupId>com.orientechnologies</groupId>
+            <artifactId>orientdb-distributed</artifactId>
+            <version>${project.version}</version>
+        </dependency>        
+    </dependencies>
 </project>
