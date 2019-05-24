@@ -1,49 +1,39 @@
-#!groovy
-node("master") {
-
-    properties([
-            pipelineTriggers([cron('H H * * H(6-7)')]),
-            [$class  : 'BuildDiscarderProperty',
-             strategy: [$class              : 'LogRotator', artifactDaysToKeepStr: '',
-                        artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10']]
-    ])
-
-    ansiColor('xterm') {
-
-        def mvnHome = tool 'mvn'
-        def mvnJdk8Image = "orientdb/mvn-gradle-zulu-jdk-8"
-
-        def containerName = env.JOB_NAME.replaceAll(/\//, "_") +
-                "_build_${currentBuild.number}"
-
-        def appNameLabel = "docker_ci";
-        def taskLabel = env.JOB_NAME.replaceAll(/\//, "_")
+@Library(['piper-lib', 'piper-lib-os']) _
+  
+node {
 
 
-        stage('Source checkout') {
+    stage('build')   {
+        sh "rm -rf *"
+        sh "cp /var/jenkins_home/uploadedContent/settings.xml ."
 
-            checkout scm
-        }
+        executeDocker(
+                dockerImage:'ldellaquila/maven-gradle-node-zulu-openjdk8:1.0.0',
+                dockerWorkspace: '/orientdb-gremlin-${env.BRANCH_NAME}'
+        ) {
 
-        stage('Run tests on Java8') {
-            lock("label": "memory", "quantity": 4) {
-                docker.image("${mvnJdk8Image}").inside("--label collectd_docker_app=${appNameLabel} --label collectd_docker_task=${taskLabel}" +
-                        " --name ${containerName} --memory=4g ${env.VOLUMES}") {
-                    try {
-                        sh "${mvnHome}/bin/mvn -f driver/pom.xml  --batch-mode -V -U -e -fae clean  deploy -Dsurefire.useFile=false"
+            try{
+                sh "rm -rf orientdb-gremlin"
 
-                        slackSend(color: '#00FF00', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                checkout(
+                        [$class: 'GitSCM', branches: [[name: env.BRANCH_NAME]],
+                         doGenerateSubmoduleConfigurations: false,
+                         extensions: [],
+                         submoduleCfg: [],
+                         extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'orientdb-gremlin']],
+                         userRemoteConfigs: [[url: 'https://github.com/orientechnologies/orientdb-gremlin']]])
 
-                    } catch (e) {
-                        currentBuild.result = 'FAILURE'
-                        slackSend(channel: '#jenkins-failures', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})\n${e}")
-                        throw e;
-                    } finally {
-                        junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
-                    }
+
+                withMaven(globalMavenSettingsFilePath: 'settings.xml') {
+                    sh "cd orientdb-gremlin && mvn clean install -DskipTests"
                 }
+            }catch(e){
+                slackSend(color: '#FF0000', channel: '#jenkins-failures', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})\n${e}")
+                throw e
             }
+            slackSend(color: '#00FF00', channel: '#jenkins', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
     }
 
 }
+
