@@ -24,7 +24,7 @@ node {
                          userRemoteConfigs: [[url: 'https://github.com/orientechnologies/orientdb-gremlin']]])
 
 
-                withMaven(mavenLocalRepo: '.repository', globalMavenSettingsFilePath: 'settings.xml') {
+                withMaven(mavenLocalRepo: '${HOME}/.m2/repository', globalMavenSettingsFilePath: 'settings.xml') {
                     sh "cd orientdb-gremlin && mvn clean deploy -DskipTests"
                 }
             }catch(e){
