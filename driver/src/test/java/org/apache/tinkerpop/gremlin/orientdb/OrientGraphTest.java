@@ -1,6 +1,7 @@
 package org.apache.tinkerpop.gremlin.orientdb;
 
 import com.orientechnologies.common.concur.lock.OLockException;
+import com.orientechnologies.orient.core.config.OGlobalConfiguration;
 import com.orientechnologies.orient.core.db.ODatabaseType;
 import com.orientechnologies.orient.core.db.OrientDB;
 import com.orientechnologies.orient.core.db.OrientDBConfig;
