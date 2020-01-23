@@ -1,4 +1,4 @@
-language: scala
+language: java
 
 os:
   - linux
@@ -14,4 +14,3 @@ install:
 
 script:
   - travis_wait 30 mvn install -P travis -B -f driver/pom.xml -Dfailsafe.timeout=0
-  - cd tests-scala ; sbt test
