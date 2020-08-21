@@ -24,10 +24,8 @@ public class OGremlinScriptResultSet implements OResultSet, OQueryMetrics {
     private boolean closeGraph;
     private boolean closing = false;
 
-    long startTime = 0;
+    long startTime;
     long totalExecutionTime = 0;
-
-    boolean first  = true;
 
     public OGremlinScriptResultSet(String iText,Traversal traversal, OScriptTransformer transformer) {
         this(iText,traversal, transformer, false);
@@ -38,6 +36,7 @@ public class OGremlinScriptResultSet implements OResultSet, OQueryMetrics {
         this.traversal = traversal;
         this.transformer = transformer;
         this.closeGraph = closeGraph;
+        this.startTime = System.currentTimeMillis();
     }
 
     @Override
@@ -50,10 +49,6 @@ public class OGremlinScriptResultSet implements OResultSet, OQueryMetrics {
 
         long begin = System.currentTimeMillis();
 
-        if(first) {
-            first = false;
-            startTime = begin;
-        }
         try {
           Object next = traversal.next();
           return transformer.toResult(next);
