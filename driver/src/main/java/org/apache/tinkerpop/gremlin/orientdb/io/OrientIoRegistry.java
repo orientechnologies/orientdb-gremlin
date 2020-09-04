@@ -1,9 +1,11 @@
 package org.apache.tinkerpop.gremlin.orientdb.io;
 
+import com.orientechnologies.orient.core.db.record.OTrackedMap;
 import com.orientechnologies.orient.core.db.record.ridbag.ORidBag;
 import com.orientechnologies.orient.core.id.ORecordId;
 import java.util.Map;
 import org.apache.tinkerpop.gremlin.orientdb.io.graphson.OrientGraphSONV3;
+import org.apache.tinkerpop.gremlin.orientdb.io.gryo.OrientMapSerializer;
 import org.apache.tinkerpop.gremlin.orientdb.io.kryo.ORecordIdKryoSerializer;
 import org.apache.tinkerpop.gremlin.orientdb.io.kryo.ORidBagKryoSerializer;
 import org.apache.tinkerpop.gremlin.structure.io.AbstractIoRegistry;
@@ -21,6 +23,7 @@ public class OrientIoRegistry extends AbstractIoRegistry {
   private OrientIoRegistry() {
     register(GryoIo.class, ORecordId.class, new ORecordIdKryoSerializer());
     register(GryoIo.class, ORidBag.class, new ORidBagKryoSerializer());
+    register(GryoIo.class, OTrackedMap.class, new OrientMapSerializer());
 
     register(GraphSONIo.class, ORecordId.class, OrientGraphSONV3.INSTANCE);
   }
