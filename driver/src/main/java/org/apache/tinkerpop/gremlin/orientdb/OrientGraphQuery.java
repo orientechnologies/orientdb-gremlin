@@ -1,5 +1,6 @@
 package org.apache.tinkerpop.gremlin.orientdb;
 
+import com.orientechnologies.orient.core.sql.executor.FetchFromBinaryIndexStep;
 import com.orientechnologies.orient.core.sql.executor.FetchFromIndexStep;
 import com.orientechnologies.orient.core.sql.executor.GlobalLetQueryStep;
 import com.orientechnologies.orient.core.sql.executor.OExecutionPlan;
@@ -52,7 +53,10 @@ public class OrientGraphQuery implements OrientGraphBaseQuery {
                         .filter(
                             plan ->
                                 plan.getSteps().stream()
-                                        .filter((step) -> step instanceof FetchFromIndexStep)
+                                        .filter(
+                                            (step) ->
+                                                step instanceof FetchFromIndexStep
+                                                    || step instanceof FetchFromBinaryIndexStep)
                                         .count()
                                     > 0)
                         .count();
@@ -61,7 +65,10 @@ public class OrientGraphQuery implements OrientGraphBaseQuery {
     } else {
       return (int)
           executionPlan.getSteps().stream()
-              .filter((step) -> step instanceof FetchFromIndexStep)
+              .filter(
+                  (step) ->
+                      step instanceof FetchFromIndexStep
+                          || step instanceof FetchFromBinaryIndexStep)
               .count();
     }
   }

@@ -14,9 +14,7 @@ import com.orientechnologies.orient.core.db.record.OIdentifiable;
 import com.orientechnologies.orient.core.exception.ORecordNotFoundException;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.id.ORecordId;
-import com.orientechnologies.orient.core.index.OIndex;
-import com.orientechnologies.orient.core.index.OIndexManager;
-import com.orientechnologies.orient.core.index.OPropertyIndexDefinition;
+import com.orientechnologies.orient.core.index.*;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OProperty;
 import com.orientechnologies.orient.core.metadata.schema.OSchema;
@@ -380,7 +378,14 @@ public final class OrientGraph implements OGraph {
       return Collections.<ElementType>emptyList().stream();
     } else {
       if (!valuesIter.hasNext()) {
-        return index.getInternal().stream().map(id -> newElement.apply(this, id.second));
+        final IndexInternal indexInternal = index.getInternal();
+        if (indexInternal instanceof IndexInternalBinaryKey) {
+          return ((IndexInternalBinaryKey) indexInternal)
+              .stream().map(pair -> newElement.apply(this, pair.second));
+        }
+
+        return ((IndexInternalOriginalKey) indexInternal)
+            .stream().map(pair -> newElement.apply(this, pair.second));
       } else {
         Stream<Object> convertedValues =
             StreamUtils.asStream(valuesIter).map(value -> convertValue(index, value));
