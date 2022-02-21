@@ -87,7 +87,7 @@ public class OrientStandardTransaction extends AbstractTransaction {
 
   @Override
   public boolean isOpen() {
-    return tx().isOpen();
+    return g.isOpen() && !g.graph().isClosed() && tx().isOpen();
   }
 
   private OrientTransaction tx() {
