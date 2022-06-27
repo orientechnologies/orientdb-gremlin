@@ -21,7 +21,7 @@
     </parent>
 
     <artifactId>orientdb-tp3</artifactId>
-  <version>3.0.43</version>
+  <version>3.0.44-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OrientDB Community Distribution TinkerPop 3</name>
