@@ -16,12 +16,12 @@
     <parent>
         <groupId>com.orientechnologies</groupId>
         <artifactId>orientdb-gremlin-parent</artifactId>
-        <version>3.0.44</version>
+        <version>3.0.45-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
 
     <artifactId>orientdb-tp3</artifactId>
-  <version>3.0.44</version>
+  <version>3.0.45-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OrientDB Community Distribution TinkerPop 3</name>
@@ -118,9 +118,4 @@
 
         </plugins>
     </build>
-
-
-  <scm>
-    <tag>3.0.44</tag>
-  </scm>
 </project>

@@ -3,13 +3,13 @@
     <parent>
         <groupId>com.orientechnologies</groupId>
         <artifactId>orientdb-gremlin-parent</artifactId>
-        <version>3.0.44</version>
+        <version>3.0.45-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
 
     <groupId>com.orientechnologies</groupId>
     <artifactId>orientdb-gremlin</artifactId>
-  <version>3.0.44</version>
+  <version>3.0.45-SNAPSHOT</version>
 
     <name>Apache TinkerPop :: OrientDB Gremlin</name>
     <description>TinkerPop3 Graph Structure Implementation for OrientDB</description>
@@ -49,7 +49,7 @@
         <connection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</connection>
         <developerConnection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</developerConnection>
         <url>https://github.com/orientechnologies/orientdb-gremlin</url>
-      <tag>3.0.44</tag>
+      <tag>HEAD</tag>
   </scm>
     <dependencies>
         <dependency>

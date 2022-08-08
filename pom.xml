@@ -20,7 +20,7 @@
 
     <name>OrientDB Gremlin</name>
     <artifactId>orientdb-gremlin-parent</artifactId>
-  <version>3.0.44</version>
+  <version>3.0.45-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>

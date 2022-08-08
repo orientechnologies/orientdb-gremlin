@@ -5,14 +5,14 @@
     <parent>
         <groupId>com.orientechnologies</groupId>
         <artifactId>orientdb-gremlin-parent</artifactId>
-        <version>3.0.44</version>
+        <version>3.0.45-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
 
     <groupId>com.orientechnologies</groupId>
     <name>OrientDB Gremlin Server Plugin</name>
     <artifactId>orientdb-gremlin-server</artifactId>
-  <version>3.0.44</version>
+  <version>3.0.45-SNAPSHOT</version>
     <properties>
         <tinkerpop.version>3.3.0</tinkerpop.version>
         <slf4j.version>1.7.21</slf4j.version>
@@ -146,8 +146,4 @@
 
         </plugins>
     </build>
-
-  <scm>
-    <tag>3.0.44</tag>
-  </scm>
 </project>
