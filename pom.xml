@@ -21,6 +21,36 @@
   <version>3.2.42-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <description>OrientDB Gremlin integration implementation</description>
+    <url>https://orientdb.dev</url>
+    <organization>
+        <name>OrientDB</name>
+        <url>https://orientdb.dev</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Enrico Risa</name>
+            <email>e.risa@orientdb.com</email>
+        </developer>
+        <developer>
+            <name>Michael Pollmeier</name>
+            <email>michael@michaelpollmeier.com</email>
+            <url>http://michaelpollmeier.com</url>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</connection>
+        <developerConnection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</developerConnection>
+        <url>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</url>
+        <tag>HEAD</tag>
+    </scm>
     <modules>
         <module>driver</module>
         <module>server</module>

@@ -11,12 +11,46 @@
     <groupId>com.orientechnologies</groupId>
     <name>OrientDB Gremlin Server Plugin</name>
     <artifactId>orientdb-gremlin-server</artifactId>
+    <description>TinkerPop3 Graph Server integration for OrientDB</description>
+    <url>https://orientdb.dev</url>
 
     <properties>
         <tinkerpop.version>3.7.2</tinkerpop.version>
         <slf4j.version>1.7.21</slf4j.version>
         <project.rootdir>${project.basedir}/../</project.rootdir>
     </properties>
+
+
+    <developers>
+        <developer>
+            <name>Enrico Risa</name>
+            <email>e.risa@orientdb.com</email>
+        </developer>
+        <developer>
+            <name>Michael Pollmeier</name>
+            <email>michael@michaelpollmeier.com</email>
+            <url>http://michaelpollmeier.com</url>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>Marvin Froeder</name>
+            <email>velo br at gmail dot com</email>
+            <url>about.me/velo</url>
+        </contributor>
+    </contributors>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.opensource.org/licenses/Apache-2.0</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</connection>
+        <developerConnection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</developerConnection>
+        <url>https://github.com/orientechnologies/orientdb-gremlin</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
         <!-- orientdb -->

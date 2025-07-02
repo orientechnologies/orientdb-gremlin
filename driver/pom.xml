@@ -11,7 +11,7 @@
 
     <name>Apache TinkerPop :: OrientDB Gremlin</name>
     <description>TinkerPop3 Graph Structure Implementation for OrientDB</description>
-    <url>https://github.com/orientechnologies/orientdb-gremlin</url>
+    <url>https://orientdb.dev</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
         <developerConnection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</developerConnection>
         <url>https://github.com/orientechnologies/orientdb-gremlin</url>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
     <dependencies>
         <!-- orientdb -->
         <dependency>
