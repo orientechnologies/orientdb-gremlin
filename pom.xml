@@ -16,6 +16,7 @@
         <version>3.2.44-SNAPSHOT</version>
     </parent>
     <name>OrientDB Gremlin</name>
+    <groupId>com.orientechnologies</groupId>
     <artifactId>orientdb-gremlin-parent</artifactId>
   <version>3.2.44-SNAPSHOT</version>
     <packaging>pom</packaging>

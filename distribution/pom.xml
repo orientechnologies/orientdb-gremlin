@@ -18,7 +18,9 @@
         <version>3.2.44-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
+    <groupId>com.orientechnologies</groupId>
     <artifactId>orientdb-tp3</artifactId>
+    <version>3.2.44-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OrientDB Community Distribution TinkerPop 3</name>

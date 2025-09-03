@@ -9,8 +9,9 @@
         <relativePath>../</relativePath>
     </parent>
     <groupId>com.orientechnologies</groupId>
-    <name>OrientDB Gremlin Server Plugin</name>
     <artifactId>orientdb-gremlin-server</artifactId>
+    <version>3.2.44-SNAPSHOT</version>
+    <name>OrientDB Gremlin Server Plugin</name>
     <description>TinkerPop3 Graph Server integration for OrientDB</description>
     <url>https://orientdb.dev</url>
 

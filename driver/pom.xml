@@ -8,6 +8,7 @@
     </parent>
     <groupId>com.orientechnologies</groupId>
     <artifactId>orientdb-gremlin</artifactId>
+    <version>3.2.44-SNAPSHOT</version>
 
     <name>Apache TinkerPop :: OrientDB Gremlin</name>
     <description>TinkerPop3 Graph Structure Implementation for OrientDB</description>
