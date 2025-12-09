@@ -18,7 +18,7 @@
     <name>OrientDB Gremlin</name>
     <groupId>com.orientechnologies</groupId>
     <artifactId>orientdb-gremlin-parent</artifactId>
-  <version>3.2.47-SNAPSHOT</version>
+  <version>3.2.47</version>
     <packaging>pom</packaging>
 
     <description>OrientDB Gremlin integration implementation</description>
@@ -49,7 +49,7 @@
         <connection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</connection>
         <developerConnection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</developerConnection>
         <url>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</url>
-        <tag>HEAD</tag>
+        <tag>3.2.47</tag>
     </scm>
     <modules>
         <module>driver</module>
