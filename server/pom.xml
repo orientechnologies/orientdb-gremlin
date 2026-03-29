@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.orientechnologies</groupId>
         <artifactId>orientdb-gremlin-parent</artifactId>
-        <version>3.2.51</version>
+        <version>3.2.52-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
     <groupId>com.orientechnologies</groupId>
     <artifactId>orientdb-gremlin-server</artifactId>
-    <version>3.2.51</version>
+    <version>3.2.52-SNAPSHOT</version>
     <name>OrientDB Gremlin Server Plugin</name>
     <description>TinkerPop3 Graph Server integration for OrientDB</description>
     <url>https://orientdb.dev</url>
@@ -50,7 +50,7 @@
         <connection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</connection>
         <developerConnection>scm:git:git@github.com:orientechnologies/orientdb-gremlin.git</developerConnection>
         <url>https://github.com/orientechnologies/orientdb-gremlin</url>
-        <tag>3.2.51</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
