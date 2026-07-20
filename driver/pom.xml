@@ -140,7 +140,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
-                    <argLine>${argLine} -Xmx2G</argLine>
+                    <argLine>${argLine} -Xmx2G -Ddb.custom.support=true</argLine>
                 </configuration>
             </plugin>
             <plugin>
